@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv
+.Python
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment variables
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Audio storage
+audio_storage/
+
+# Database files
+*.db
+*.sqlite
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.pyc
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Alembic
+alembic/versions/*.pyc

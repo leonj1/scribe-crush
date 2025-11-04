@@ -1,0 +1,115 @@
+.dashboard-layout {
+  height: 100vh;
+}
+
+.dashboard-header {
+  background: #001529;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.header-title {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.user-avatar {
+  cursor: pointer;
+  background-color: #1890ff;
+}
+
+.recordings-sider {
+  background: #f0f2f5;
+  overflow-y: auto;
+}
+
+.sider-header {
+  padding: 16px;
+  background: white;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.sider-header h3 {
+  margin: 0;
+}
+
+.recordings-sider .ant-list-item {
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: background 0.3s;
+}
+
+.recordings-sider .ant-list-item:hover {
+  background: #e6f7ff;
+}
+
+.recordings-sider .ant-list-item.selected {
+  background: #bae7ff;
+}
+
+.main-content {
+  padding: 24px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state {
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 80px;
+  color: #d9d9d9;
+  margin-bottom: 24px;
+}
+
+.recording-state {
+  text-align: center;
+  width: 100%;
+}
+
+.waveform-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: 200px;
+  margin-bottom: 32px;
+}
+
+.wave {
+  width: 8px;
+  background: #1890ff;
+  animation: wave 1s ease-in-out infinite;
+}
+
+.wave:nth-child(1) { animation-delay: 0s; }
+.wave:nth-child(2) { animation-delay: 0.1s; }
+.wave:nth-child(3) { animation-delay: 0.2s; }
+.wave:nth-child(4) { animation-delay: 0.3s; }
+.wave:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes wave {
+  0%, 100% {
+    height: 20px;
+  }
+  50% {
+    height: 100px;
+  }
+}
+
+.recording-controls {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.recording-details {
+  width: 100%;
+  max-width: 800px;
+}

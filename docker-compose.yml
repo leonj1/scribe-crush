@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: transcription_db
+      MYSQL_USER: transcription_user
+      MYSQL_PASSWORD: transcription_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "9500:8000"
+    environment:
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      LLM_API_KEY: ${LLM_API_KEY}
+      MYSQL_URL: mysql+pymysql://transcription_user:transcription_pass@mysql:3306/transcription_db
+      AUDIO_STORAGE_PATH: /app/audio_storage
+      JWT_SECRET: ${JWT_SECRET:-your_jwt_secret_key_change_this}
+      FRONTEND_URL: http://localhost:9501
+    volumes:
+      - ./backend:/app
+      - audio_storage:/app/audio_storage
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "9501:3000"
+    environment:
+      VITE_API_URL: http://localhost:9500
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+  audio_storage:
